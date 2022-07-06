@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper.UserMapper">
+    <!--int insertUser();-->
+    <insert id="insertUser">
+        insert into t_user values(null,'张三','123',23,'女','123@qq.com')
+    </insert>
+
+    <!--void updateUser();-->
+    <update id="updateUser">
+        update t_user set username = '李四' where id = 3;
+    </update>
+
+    <!-- void deleteUser();-->
+    <delete id="deleteUser">
+        delete from t_user where id = 18;
+    </delete>
+
+
+    <!--User getUserById();-->
+    <!--
+    查询功能的标签必须设置resultType或resultMap
+    resultType:设置默认的映射关系（自动匹配字段名进行赋值）
+    resultMap:设置自定义的映射关系（字段名和属性名不一致，或者是一对多）
+    -->
+    <select id="getUserById" resultType="mybatis.pojo.User">
+        select * from t_user where id = 3;
+    </select>
+
+
+    <!--List<User> getAllUser(); -->
+<!--    <select id="getAllUser" resultType="mybatis.pojo.User">-->
+    <!-- 因为在mybatis-config,xml中设置了类型别名 ，类型别名不区分大小写-->
+    <select id="getAllUser" resultType="User">
+        select * from t_user;
+    </select>
+
+
+    <!--${}是拼接字符串，#{}是占位符-->
+
+
+    <!--User getUserByUsername(String username);-->
+    <!--如果单个参数，#{}中可以填写任意名称-->
+    <!--${}需要在外面加单引号-->
+    <select id="getUserByUsername" resultType="User">
+        <!--select * from t_user where username = #{username};-->
+        select * from t_user where username = '${username}';
+    </select>
+
+    <!--User checkLogin(String username,String password);-->
+    <!--mapper接口方法的参数为多个时，此时MyBatis会将这些参数放在一个map集合中，以两种方式进行存储-->
+    <!--如果是多个参数,需要使用arg0,arg1,arg2...或者param0,param1,param2.....-->
+    <select id="checkLogin" resultType="User">
+        <!--select * from t_user where username = #{arg0}  and password = #{arg1};-->
+        select * from t_user where username = '${arg0}'  and password = '${arg1}'
+    </select>
+
+
+
+    <!--User checkLoginByMap(Map<String,Object> map);-->
+    <!--只需要通过${}和#{}以键的名字的方式来访问值即可-->
+    <select id="checkLoginByMap" resultType="User">
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
+
+
+    <!--如果参数是实体类类型的参数,通过属性名来获取属性值-->
+    <!--int insertUserByUser(User user);-->
+    <insert id="insertUserByUser">
+        insert into t_user values (null,#{username},#{password},#{age},#{sex},#{email})
+    </insert>
+
+
+    <!--User checkLoginByParam(@Param("username")String username,@Param("password") String password);-->
+    <!--会把两个参数放入Map中，以@Param("username")设置的value为键，参数为值-->
+    <select id="checkLoginByParam" resultType="User">
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
+
+    <!--    Map<String,Object> getAllUserToMap();-->
+    <select id="getAllUserToMap" resultType="map">
+        select * from t_user;
+    </select>
+
+
+    <!--返回自增的主键-->
+    <!--void insertUserReturnId(User user);-->
+    <!--设置可以返回自增的主键，并且返回给User的id-->
+    <!--useGeneratedKeys设置当前标签中的sql使用了自增的主键-->
+    <!--keyProperty：将自增的主键的值赋值给传输到映射文件中参数的某个属性-->
+    <insert id="insertUserReturnId" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user values(null,#{username},#{password},#{age},#{sex},#{email})
+    </insert>
+
+</mapper>

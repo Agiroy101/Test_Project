@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>首页</h1>
+<!--<a th:href="@{/target}">访问目标页面target.html</a><br/>-->
+<!--<a th:href="@{/testPath/1/admin}">测试@RequestMapping支持路径中的占位符->testPath</a>-->
+<!--<form th:action="@{/testParam}" method="get">-->
+<!--    用户名<input type="text" name="user_name"><br>-->
+<!--    密码:<input type="password" name="password"><br>-->
+<!--    爱好：<input type="checkbox" name="hobby" value="a">a-->
+<!--    <input type="checkbox" name="hobby" value="b">b-->
+<!--    <input type="checkbox" name="hobby" value="c">c<br>-->
+<!--    <input type="submit" value="测试使用控制器的形参获取请求参数">-->
+<!--</form>-->
+
+<!--<form th:action="@{/testPojo}" method="post">-->
+<!--    用户名<input type="text" name="username"><br>-->
+<!--    密码:<input type="password" name="password"><br>-->
+<!--    爱好：<input type="radio" name="sex" value="男">男-->
+<!--    <input type="radio" name="sex" value="女">女<br>-->
+<!--    年龄：<input type="text" name="age"><br>-->
+<!--    邮箱：<input type="text" name="email"><br>-->
+<!--    <input type="submit" value="测试使用实体类获取请求参数">-->
+<!--</form>-->
+<!--<br><br><br><br><br>-->
+<!--<a th:href="@{/testModelAndView}">通过ModelAndView向request域对象共享数据</a>-->
+<!--<br>-->
+<!--<a th:href="@{/testModel}">通过Model向request域对象共享数据</a><br>-->
+
+<!--<a th:href="@{/testMap}">通过Map向request域对象共享数据</a><br>-->
+
+<!--<a th:href="@{/testModelMap}">通过ModelMap向request域对象共享数据</a><br>-->
+
+
+<a th:href="@{/employee}">查看员工信息</a><br>
+
+<a th:href="@{/testResponseUser}">testResponseUser</a>
+
+<a th:href="@{/testInterceptor}">测试拦截器</a>
+
+<a th:href="@{/testExceptionHandler}">测试异常处理</a>
+
+
+
+
+</body>
+</html>
